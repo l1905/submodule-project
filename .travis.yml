@@ -3,5 +3,5 @@ php:
   - 7.1.9
 script: 
   - echo "1234567"
-  - echo ${SUB-ENV}
+  - echo $SUB-ENV
 
