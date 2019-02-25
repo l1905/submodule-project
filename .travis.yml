@@ -1,7 +1,23 @@
 language: php
 php:
   - 7.1.9
-script: 
-  - echo "1234567"
-  - echo $SUB
-
+env:
+  global:
+  - USER="litong"
+  - EMAIL="litonglitong@hotmail.com"
+  - REPO="git-main"
+  - FILES="foo.txt"
+  - GH_REPO="github.com/${USER}/${REPO}.git"
+script:
+  - echo "hello world" > foo.txt
+after_success:
+  - MESSAGE="add message"
+  - git clone git://${GH_REPO}
+  - mv -f ${FILES} ${REPO}
+  - cd ${REPO}
+  - git remote
+  - git config user.email ${EMAIL}
+  - git config user.name ${USER}
+  - git add ${FILES}
+  - git commit -m ${MESSAGE}
+  - git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" master > /dev/null 2>&1
