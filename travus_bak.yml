@@ -11,12 +11,13 @@ env:
 script:
   - echo "hello world submodule" > foo.txt
 after_success:
+  - MESSAGE="add submodule message"
   - git clone --recursive git://${GH_REPO}
+  - mv -f ${FILES} ${REPO}
   - cd ${REPO}
   - git remote
-  - git submodule update --remote
   - git config user.email ${EMAIL}
   - git config user.name ${GIT_USER}
-  - git add submodule-project
-  - git commit -m "update submodule-project hash"
+  - git add ${FILES}
+  - git commit -m "add submodule message"
   - git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" master > /dev/null 2>&1
