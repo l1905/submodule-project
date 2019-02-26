@@ -12,7 +12,7 @@ script:
   - echo "hello world submodule" > foo.txt
 after_success:
   - MESSAGE="add submodule message"
-  - git clone git://${GH_REPO}
+  - git clone --recursive git://${GH_REPO}
   - mv -f ${FILES} ${REPO}
   - cd ${REPO}
   - git remote
