@@ -3,21 +3,21 @@ php:
   - 7.1.9
 env:
   global:
-  - USER="litong"
+  - GIT_USER="l1905"
   - EMAIL="litonglitong@hotmail.com"
   - REPO="git-main"
   - FILES="foo.txt"
-  - GH_REPO="github.com/${USER}/${REPO}.git"
+  - GH_REPO="github.com/${GIT_USER}/${REPO}.git"
 script:
-  - echo "hello world" > foo.txt
+  - echo "hello world submodule" > foo.txt
 after_success:
-  - MESSAGE="add message"
+  - MESSAGE="add submodule message"
   - git clone git://${GH_REPO}
   - mv -f ${FILES} ${REPO}
   - cd ${REPO}
   - git remote
   - git config user.email ${EMAIL}
-  - git config user.name ${USER}
+  - git config user.name ${GIT_USER}
   - git add ${FILES}
   - git commit -m ${MESSAGE}
   - git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" master > /dev/null 2>&1
